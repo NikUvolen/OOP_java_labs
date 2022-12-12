@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class Assignments {
@@ -7,6 +8,8 @@ public final class Assignments {
         int stringCenter = userInput.length() % 2 == 0 ? userInput.length() / 2 : userInput.length() / 2 + 1;
         stringCenter -= 1;
 
+        if (userInput.length() == 0)
+            return "Строка пустая";
         if (userInput.charAt(stringCenter) == ' ')
             return "Центральный символ - пробел.";
 
@@ -14,7 +17,7 @@ public final class Assignments {
         StringBuilder resultWord = new StringBuilder();
         StringBuilder reverseWord = new StringBuilder();
 
-        while (userInput.charAt(cursor) != ' ') {
+        while (cursor >= 0 && userInput.charAt(cursor) != ' ') {
             reverseWord.append(userInput.charAt(cursor));
             cursor -= 1;
         }
@@ -33,8 +36,17 @@ public final class Assignments {
     public static List<Character> AssignmentSecond(String userInput) {
         char[] chars = userInput.toLowerCase().toCharArray();
         String charsForSearch = new String(chars);
+        List<Character> imageChars = new ArrayList<Character>(Arrays.asList('.', ',', '-', '=', '!', '?', ':'));
+
+        for (char c = 'a'; c <= 'z' ; ++c)
+            imageChars.add(c);
+        for (char c = 'а'; c <= 'я'; ++c)
+            imageChars.add(c);
+        for (char c = '0'; c <= '9'; ++c)
+            imageChars.add(c);
+
         List<Character> result = new ArrayList<Character>();
-        for (char c = 'а'; c <= 'я'; ++c) {
+        for (char c : imageChars) {
             int n = 0;
             for (char aChar : chars) {
                 if (aChar == c)

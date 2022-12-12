@@ -20,22 +20,33 @@ class Main {
         else if (assignmentChoice == 1) {
             String userInput = Utils.Input("Введите предложение: ", false);
             List<Character> result = Assignments.AssignmentSecond(userInput);
-            System.out.print("Буквы, встречающиеся в тексте менее 10%: ");
-            for (int idx = 0; idx < result.size(); ++idx) {
-                System.out.print(result.get(idx));
-                if (idx == result.size() - 1)
-                    System.out.print(".");
-                else
-                    System.out.print(", ");
+            if (!result.isEmpty()) {
+                System.out.print("Символы, встречающиеся в тексте менее 10%: ");
+                for (int idx = 0; idx < result.size(); ++idx) {
+                    System.out.printf("\"%c\"", result.get(idx));
+                    if (idx == result.size() - 1)
+                        System.out.print(".");
+                    else
+                        System.out.print(", ");
+                }
+            }
+            else {
+                System.out.println("Результат: Строка пустая или слишком мало символов.");
             }
         }
         else if (assignmentChoice == 2) {
             String userInput = Utils.Input("Введите предложение: ", false);
             List<String> result = Assignments.AssignmentThird(userInput);
-            System.out.print("Результат выполнения 3 задания:\n");
-            for (String word : result) {
-                System.out.println(word);
+            if (!result.isEmpty()) {
+                System.out.print("Результат выполнения 3 задания:\n");
+                for (String word : result) {
+                    System.out.println(word);
+                }
             }
+            else {
+                System.out.println("Результат: Не было найдено подходящих слов");
+            }
+
         }
         else {
             System.out.printf("! Такого задания под номером %d не было найдено...", assignmentChoice + 1);
