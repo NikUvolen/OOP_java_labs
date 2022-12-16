@@ -1,5 +1,3 @@
-import org.json.simple.parser.JSONParser;
-
 public final class Menu {
     private static void basePrintMenu(String title, String[] menuMarks) {
         System.out.print("\n");
@@ -13,10 +11,15 @@ public final class Menu {
         System.out.println(Utils.wrapText("==", '=', (byte) 9, 0));
     }
 
-    public static void printMainMenu(String exitText) {
+    public static void printMainMenu(String exitText, boolean isSaveToFile) {
         String[] mainMenuMarks = new String[] {
-                "Задание 1", "Задание 2", "Задание 3"
+                "Включить/выключить вывод в файл (сейчас: %s)", "Задание 1", "Задание 2", "Задание 3"
         };
+
+        if (isSaveToFile)
+            mainMenuMarks[0] = String.format(mainMenuMarks[0], "включено");
+        else
+            mainMenuMarks[0] = String.format(mainMenuMarks[0], "выключено");
 
         basePrintMenu("Main menu", mainMenuMarks);
 

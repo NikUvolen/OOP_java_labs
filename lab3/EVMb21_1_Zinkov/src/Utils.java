@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -50,5 +53,24 @@ public final class Utils {
             return symbolsText + textForWrap;
         else
             return textForWrap + symbolsText;
+    }
+
+    public static void writeToFile(String path, String textToWrite) throws IOException {
+        File file = new File(path);
+        file.createNewFile();
+
+        try (FileWriter fileOut = new FileWriter(path)) {
+            fileOut.write(textToWrite);
+        }
+    }
+
+    public static void printFileOrSave(String path, boolean isSaveOn, String text) throws IOException {
+        if (isSaveOn) {
+            System.out.println("Результат был сохранён в файл.");
+            writeToFile(path, text);
+        }
+        else {
+            System.out.print(text);
+        }
     }
 }

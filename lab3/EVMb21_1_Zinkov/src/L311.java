@@ -1,4 +1,4 @@
-import java.util.List;
+import java.io.*;
 
 final class MarkChoiceResult {
     private final int markResult;
@@ -50,21 +50,19 @@ public class L311 {
     }
 
 
-    // TODO: Перенести блоки из switch в класс с Menu
-    // TODO: Реализовать выбор вывода на консоль или в текстовый файл
-    // TODO: Написать отчёт и отправить
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String cmdCommand = "";
         String exitText = "exit";
         String wrongChoiceAnswer = "!!! %d путкта не существует. Введите ещё раз. !!!\n";
         String textForPrint = "Сделайте выбор дальнейших действий: ";
-        String resultTemplate = "!!! Резултат выполнения: %s\n";
+        String resultTemplate = "!!! Результат выполнения %d задания: %s\n";
         String cmdCommandExs;
+        String pathToSave = "result.txt";
+        boolean isSaveToFile = false;
 
         while (!cmdCommand.equals(exitText)) {
             cmdCommandExs = "";
-            Menu.printMainMenu(exitText);
+            Menu.printMainMenu(exitText, isSaveToFile);
             int markNumber;
 
             MarkChoiceResult validResult = isCmdCommandValid("Введите команду: ", exitText);
@@ -74,16 +72,21 @@ public class L311 {
             else
                 continue;
 
-            if (validResult.getMarkResult() > 3 || validResult.getMarkResult() < 1) {
+            if (validResult.getMarkResult() > 4 || validResult.getMarkResult() < 1) {
                 System.out.printf(wrongChoiceAnswer, validResult.getMarkResult());
+                continue;
+            }
+            if (validResult.getMarkResult() == 1) {
+                isSaveToFile = !isSaveToFile;
                 continue;
             }
 
             while (!cmdCommandExs.equals(exitText)) {
                 int userChoice;
+                String result;
 
                 switch (markNumber) {
-                    case (1):
+                    case (2):
                         int numberOfPointMenu = Menu.printEx1Menu();
 
                         MarkChoiceResult exResult = isCmdCommandValid(textForPrint, exitText);
@@ -96,14 +99,24 @@ public class L311 {
                         }
                         else if (exResult.getMarkResult() == 1) {
                             String userInput = Utils.Input("Введите предложение: ", false);
-                            System.out.printf(resultTemplate, Assignments.AssignmentFirst(userInput));
+                            result = String.format(
+                                    resultTemplate,
+                                    markNumber,
+                                    Assignments.AssignmentFirst(userInput)
+                            );
+                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
                         }
                         else {
-                            System.out.printf(resultTemplate, Assignments.AssignmentFirst("Привет, мир!"));
+                            result = String.format(
+                                    resultTemplate,
+                                    markNumber,
+                                    Assignments.AssignmentFirst("Привет, мир!")
+                            );
+                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
                         }
 
                         break;
-                    case(2):
+                    case(3):
                         numberOfPointMenu = Menu.printEx2Menu();
 
                         exResult = isCmdCommandValid(textForPrint, exitText);
@@ -118,14 +131,24 @@ public class L311 {
                         else if (exResult.getMarkResult() == 1) {
                             String userInput = Utils.Input("Введите предложение: ", false);
 
-                            System.out.printf(resultTemplate, Assignments.AssignmentSecond(userInput));
+                            result = String.format(
+                                    resultTemplate,
+                                    markNumber,
+                                    Assignments.AssignmentSecond(userInput)
+                            );
+                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
                         }
                         else {
-                            System.out.printf(resultTemplate, Assignments.AssignmentSecond("Привет, мир!"));
+                            result = String.format(
+                                    resultTemplate,
+                                    markNumber,
+                                    Assignments.AssignmentSecond("Привет, мир!")
+                            );
+                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
                         }
 
                         break;
-                    case(3):
+                    case(4):
                         numberOfPointMenu = Menu.printEx3Menu();
 
                         exResult = isCmdCommandValid(textForPrint, exitText);
@@ -138,10 +161,20 @@ public class L311 {
                         }
                         else if (exResult.getMarkResult() == 1) {
                             String userInput = Utils.Input("Введите предложение: ", false);
-                            System.out.printf(resultTemplate, Assignments.AssignmentThird(userInput));
+                            result = String.format(
+                                    resultTemplate,
+                                    markNumber,
+                                    Assignments.AssignmentThird(userInput)
+                            );
+                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
                         }
                         else {
-                            System.out.printf(resultTemplate, Assignments.AssignmentThird("Привет, мир!"));
+                            result = String.format(
+                                    resultTemplate,
+                                    markNumber,
+                                    Assignments.AssignmentThird("Привет, мир!")
+                            );
+                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
                         }
 
                         break;
