@@ -55,7 +55,7 @@ public final class Utils {
             return textForWrap + symbolsText;
     }
 
-    public static void writeToFile(String path, String textToWrite) throws IOException {
+    private static void writeToFile(String path, String textToWrite) throws IOException {
         File file = new File(path);
         file.createNewFile();
 
@@ -64,7 +64,7 @@ public final class Utils {
         }
     }
 
-    public static void printFileOrSave(String path, boolean isSaveOn, String text) throws IOException {
+    public static void printOrSaveToFile(String path, boolean isSaveOn, String text) throws IOException {
         if (isSaveOn) {
             System.out.println("Результат был сохранён в файл.");
             writeToFile(path, text);

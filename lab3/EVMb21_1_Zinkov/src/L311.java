@@ -104,7 +104,7 @@ public class L311 {
                                     markNumber,
                                     Assignments.AssignmentFirst(userInput)
                             );
-                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
+                            Utils.printOrSaveToFile(pathToSave, isSaveToFile, result);
                         }
                         else {
                             result = String.format(
@@ -112,7 +112,7 @@ public class L311 {
                                     markNumber,
                                     Assignments.AssignmentFirst("Привет, мир!")
                             );
-                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
+                            Utils.printOrSaveToFile(pathToSave, isSaveToFile, result);
                         }
 
                         break;
@@ -136,7 +136,7 @@ public class L311 {
                                     markNumber,
                                     Assignments.AssignmentSecond(userInput)
                             );
-                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
+                            Utils.printOrSaveToFile(pathToSave, isSaveToFile, result);
                         }
                         else {
                             result = String.format(
@@ -144,7 +144,7 @@ public class L311 {
                                     markNumber,
                                     Assignments.AssignmentSecond("Привет, мир!")
                             );
-                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
+                            Utils.printOrSaveToFile(pathToSave, isSaveToFile, result);
                         }
 
                         break;
@@ -166,7 +166,7 @@ public class L311 {
                                     markNumber,
                                     Assignments.AssignmentThird(userInput)
                             );
-                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
+                            Utils.printOrSaveToFile(pathToSave, isSaveToFile, result);
                         }
                         else {
                             result = String.format(
@@ -174,7 +174,7 @@ public class L311 {
                                     markNumber,
                                     Assignments.AssignmentThird("Привет, мир!")
                             );
-                            Utils.printFileOrSave(pathToSave, isSaveToFile, result);
+                            Utils.printOrSaveToFile(pathToSave, isSaveToFile, result);
                         }
 
                         break;

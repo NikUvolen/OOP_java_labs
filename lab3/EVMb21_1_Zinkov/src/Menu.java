@@ -1,4 +1,4 @@
-public final class Menu {
+public final class  Menu {
     private static void basePrintMenu(String title, String[] menuMarks) {
         System.out.print("\n");
         System.out.println(Utils.wrapText(title, '=', (byte) 8, 0));
