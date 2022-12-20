@@ -60,14 +60,19 @@ public final class Assignments {
         }
 
         StringBuilder stringResult = new StringBuilder();
-        for (int i = 0; i < result.size(); ++i) {
-            if (i < result.size() - 1)
-                stringResult.append(String.format("\"%c\", ", result.get(i)));
-            else
-                stringResult.append(String.format("\"%c\".", result.get(i)));
+        if (!stringResult.isEmpty())
+        {
+            for (int i = 0; i < result.size(); ++i) {
+                if (i < result.size() - 1)
+                    stringResult.append(String.format("\"%c\", ", result.get(i)));
+                else
+                    stringResult.append(String.format("\"%c\".", result.get(i)));
+            }
+            return stringResult.toString();
         }
-
-        return stringResult.toString();
+        else {
+            return "Строка пустая или слишком мало символов.";
+        }
     }
 
     public static String AssignmentThird(String userInput) {
