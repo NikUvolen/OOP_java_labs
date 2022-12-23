@@ -13,13 +13,16 @@ public class Husband extends Human {
     }
 
     @Override
-    public String getStr() {
-        return super.getStr();
-    }
-
-    @Override
     public void act() {
-        this.getHome().addDirt(8);
+        if (this.getFullness() <= 0 || this.getHappiness() <= 10) {
+            System.out.printf("%s умер...\n", this.getName());
+            return;
+        }
+        else if (this.getFullness() <= 25) {
+            this.eat(ThreadLocalRandom.current().nextInt(15, 30+1));
+        }
+
+        this.getHome().addDirt(4);
 
         if (getHome().getDirt() >= 90)
             this.reduceHappiness(10);
@@ -33,11 +36,6 @@ public class Husband extends Human {
             this.PetPet();
         else
             this.lazinessAllDay();
-
-        if (this.getFullness() <= 0 || this.getHappiness() <= 10)
-            System.out.printf("%s умер...\n", this.getName());
-        else if (this.getFullness() <= 25)
-            this.eat(ThreadLocalRandom.current().nextInt(15, 30+1));
     }
 
 

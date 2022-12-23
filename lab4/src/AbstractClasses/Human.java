@@ -2,28 +2,22 @@ package AbstractClasses;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-abstract public class Human {
-    String name;
-    int fullness;
+abstract public class Human extends Creature {
     int happiness;
-    Home home;
 
     public Human(String name, Home home) {
-        this.name = name;
-        this.fullness = 30;
+        super(name, home);
         this.happiness = 100;
-        this.home = home;
     }
 
+    @Override
     public String getStr() {
         return String.format("Я %s, моя сытость %d ед., моё счастье %d ед.",
-                this.name, this.fullness, this.happiness);
+                this.getName(), this.getFullness(), this.getHappiness());
     }
 
-    public void act() {}
-
     public void eat(int numberSpacing) {
-        System.out.printf("%s решает поесть", this.name);
+        System.out.printf("%s решает поесть", this.getName());
         int randomEd = numberSpacing;
         if (this.getHome().getEat() >= randomEd) {
             this.addFullness(randomEd);
@@ -37,14 +31,9 @@ abstract public class Human {
         }
     }
 
-    public void lazinessAllDay() {
-        System.out.printf("%s решает ничего сегодня не делать.\n", this.name);
-        this.fullness -= 10;
-    }
-
     public void PetPet() {
         int random = ThreadLocalRandom.current().nextInt(0, 100+1);
-        System.out.printf("%s решает погладить ", this.name);
+        System.out.printf("%s решает погладить ", this.getName());
         if (random > 50) {
             System.out.println("кота");
             this.home.pettedCat += 1;
@@ -53,15 +42,10 @@ abstract public class Human {
             System.out.println("собаку");
             this.home.pettedDog += 1;
         }
-        this.happiness += 5;
+        this.happiness += 10;
     }
 
-    public String getName() {return this.name;}
     public int getHappiness() {return this.happiness;}
     public void reduceHappiness(int num) {this.happiness -= num;}
     public void addHappiness(int num) {this.happiness += num;}
-    public int getFullness() {return this.fullness;}
-    public void reduceFullness(int num) {this.fullness -= num;}
-    public void addFullness(int num) {this.fullness += num;}
-    public Home getHome() {return this.home;}
 }
