@@ -1,12 +1,13 @@
 package AbstractClasses;
 
+import javax.swing.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 abstract public class Human extends Creature {
     int happiness;
 
-    public Human(String name, Home home) {
-        super(name, home);
+    public Human(String name, Home home, JTextArea logs) {
+        super(name, home, logs);
         this.happiness = 100;
     }
 
@@ -17,30 +18,46 @@ abstract public class Human extends Creature {
     }
 
     public void eat(int numberSpacing) {
-        System.out.printf("%s решает поесть", this.getName());
+        this.logs.append(String.format("%s решает поесть", this.getName()));
         int randomEd = numberSpacing;
         if (this.getHome().getEat() >= randomEd) {
             this.addFullness(randomEd);
             this.getHome().reduceEat(randomEd);
 
             this.getHome().addEatenFood(randomEd);
-            System.out.print("\n");
+            this.logs.append("\n");
         }
         else {
-            System.out.println(", но дома нет еды.");
+            this.logs.append(", но дома нет еды.\n");
         }
+    }
+
+    void PetCat() {
+        logs.append("кота\n");
+        this.getHome().pettedCat += 1;
+    }
+
+    void PetDog() {
+        this.logs.append("собаку\n");
+        this.getHome().pettedDog += 1;
     }
 
     public void PetPet() {
         int random = ThreadLocalRandom.current().nextInt(0, 100+1);
-        System.out.printf("%s решает погладить ", this.getName());
-        if (random > 50) {
-            System.out.println("кота");
-            this.home.pettedCat += 1;
+        this.logs.append(String.format("%s решает погладить ", this.getName()));
+        if (this.getHome().isHaveCat() && !this.getHome().isHaveDog()) {
+            PetCat();
+        }
+        else if (!this.getHome().isHaveCat() && this.getHome().isHaveDog()) {
+            PetDog();
         }
         else {
-            System.out.println("собаку");
-            this.home.pettedDog += 1;
+            if (random > 50) {
+                PetCat();
+            }
+            else {
+                PetDog();
+            }
         }
         this.happiness += 10;
     }

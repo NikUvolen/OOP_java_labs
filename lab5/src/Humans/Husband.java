@@ -2,20 +2,21 @@ package Humans;
 import AbstractClasses.Human;
 import AbstractClasses.Home;
 
+import javax.swing.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Husband extends Human {
     int bonusesReceived = 0;
     int playedOnPc = 0;
 
-    public Husband(String name, Home home) {
-        super(name, home);
+    public Husband(String name, Home home, JTextArea logs) {
+        super(name, home, logs);
     }
 
     @Override
     public void act() {
         if (this.getFullness() <= 0 || this.getHappiness() <= 10) {
-            System.out.printf("%s умер...\n", this.getName());
+            this.logs.append(String.format("%s умер...\n", this.getName()));
             return;
         }
         else if (this.getFullness() <= 25) {
@@ -32,7 +33,7 @@ public class Husband extends Human {
             this.work();
         else if (dice == 0)
             this.gaming();
-        else if (dice == 1)
+        else if (dice == 1 && (this.getHome().isHaveCat() || this.getHome().isHaveDog()))
             this.PetPet();
         else
             this.lazinessAllDay();
@@ -40,24 +41,28 @@ public class Husband extends Human {
 
 
     private void work() {
-        System.out.printf("В доме мало денег, поэтому %s пошёл на работу.", this.getName());
+//        System.out.printf("В доме мало денег, поэтому %s пошёл на работу.", this.getName());
+        this.logs.append(String.format("В доме мало денег, поэтому %s пошёл на работу.", this.getName()));
         this.getHome().addMoney(150);
         this.reduceHappiness(10);
         this.reduceFullness(10);
 
         int random = ThreadLocalRandom.current().nextInt(0, 100+1);
         if (random <= 10) {
-            System.out.print(" На работе выдали премию!");
+//            System.out.print(" На работе выдали премию!");
+            this.logs.append(" На работе выдали премию!");
             this.getHome().addMoney(500);
             this.addHappiness(35);
             this.bonusesReceived += 1;
         }
 
-        System.out.print("\n");
+        this.logs.append("\n");
+//        System.out.print("\n");
     }
 
     private void gaming() {
-        System.out.printf("%s сел в свой т-34 и поехал играть в WoT.\n", this.getName());
+        logs.append(String.format("%s сел в свой т-34 и поехал играть в WoT.\n", this.getName()));
+//        System.out.printf("%s сел в свой т-34 и поехал играть в WoT.\n", this.getName());
         this.reduceFullness(10);
         this.addHappiness(20);
         this.playedOnPc += 1;

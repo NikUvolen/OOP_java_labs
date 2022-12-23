@@ -2,17 +2,18 @@ package Pets;
 import AbstractClasses.Home;
 import AbstractClasses.Pet;
 
+import javax.swing.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Cat extends Pet {
-    public Cat(String name, String type, Home home) {
-        super(name, type, home);
+public class Dog extends Pet {
+    public Dog(String name, String type, Home home, JTextArea logs) {
+        super(name, type, home, logs);
     }
 
     @Override
     public void act() {
         if (this.getFullness() <= 0) {
-            System.out.printf("%s %s умер...\n", this.getType(), this.getName());
+            logs.append(String.format("%s %s умер...\n", this.getType(), this.getName()));
             return;
         }
         else if (this.getFullness() <= 25) {

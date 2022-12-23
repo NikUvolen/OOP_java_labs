@@ -2,15 +2,21 @@ package Humans;
 import AbstractClasses.Human;
 import AbstractClasses.Home;
 
+import javax.swing.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Child extends Human {
-    public Child(String name, Home home) {
-        super(name, home);
+    public Child(String name, Home home, JTextArea logs) {
+        super(name, home, logs);
     }
 
     @Override
     public void act() {
+        if (this.getFullness() <= 0 || this.getHappiness() <= 10) {
+            this.logs.append(String.format("%s умер...\n", this.getName()));
+            return;
+        }
+
         if (this.getFullness() < 20)
             this.eat(20);
 
@@ -22,7 +28,7 @@ public class Child extends Human {
     }
 
     private void sleep() {
-        System.out.printf("%s лег спать.", this.getName());
+        this.logs.append(String.format("%s лег спать.\n", this.getName()));
         this.reduceFullness(5);
     }
 }

@@ -3,18 +3,19 @@ package Humans;
 import AbstractClasses.Human;
 import AbstractClasses.Home;
 
+import javax.swing.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Wife extends Human{
     int shoppingTrips = 0;
     int totalCleanings = 0;
 
-    public Wife(String name, Home home) {super(name, home);}
+    public Wife(String name, Home home, JTextArea logs) {super(name, home, logs);}
 
     @Override
     public void act() {
         if (this.getFullness() <= 0 || this.getHappiness() <= 10) {
-            System.out.printf("%s умерла...\n", this.getName());
+            this.logs.append(String.format("%s умерла...\n", this.getName()));
             return;
         }
         else if (this.getFullness() <= 25) {
@@ -35,29 +36,29 @@ public class Wife extends Human{
             this.cleanHouse();
         else if (dice == 0)
             this.shopping();
-        else if (dice == 1)
+        else if (dice == 1 && (this.getHome().isHaveCat() || this.getHome().isHaveDog()))
             this.PetPet();
         else
             this.lazinessAllDay();
     }
 
     private void shopping() {
-        System.out.printf("%s пошла пошопиться с подругами", this.getName());
+        this.logs.append(String.format("%s пошла пошопиться с подругами", this.getName()));
         this.reduceFullness(10);
         this.addHappiness(60);
         if (this.getHome().getMoney() >= 600) {
             this.getHome().reduceMoney(550);
-            System.out.print("и купила себе новую шубу.\n");
+            this.logs.append("и купила себе новую шубу.\n");
             this.getHome().addFurCoatsBought(1);
         }
         else {
-            System.out.print(", но ничего не купила.\n");
+            this.logs.append(", но ничего не купила.\n");
         }
         this.shoppingTrips += 1;
     }
 
     private void buyFood(String forWho) {
-        System.out.printf("Дома осталось мало еды, поэтому %s пошла в магазин", this.getName());
+        this.logs.append(String.format("Дома осталось мало еды, поэтому %s пошла в магазин", this.getName()));
         this.reduceFullness(10);
         this.reduceHappiness(5);
         boolean didBuyFood = false;
@@ -80,13 +81,16 @@ public class Wife extends Human{
         }
 
         if (!didBuyFood)
-            System.out.print(", но ей не хватило денег.\n");
+            this.logs.append(", но ей не хватило денег.\n");
         else
-            System.out.print("\n");
+            this.logs.append("\n");
     }
 
     private void cleanHouse() {
-        System.out.printf("%s не любит грязь в доме, поэтому решила потратить день на уборку.\n", this.getName());
+        this.logs.append(
+                String.format("%s не любит грязь в доме, поэтому решила потратить день на уборку.\n",
+                this.getName())
+        );
         this.reduceFullness(10);
         this.getHome().cleanHome();
         this.totalCleanings += 1;

@@ -14,11 +14,19 @@ public class Home {
     int dirt;
     int petFood;
 
-    public Home() {
+    boolean isHaveChild;
+    boolean isHaveCat;
+    boolean isHaveDog;
+
+    public Home(boolean child, boolean cat, boolean dog) {
         this.money = 100;
         this.eat = 50;
         this.dirt = 0;
         this.petFood = 30;
+
+        this.isHaveChild = child;
+        this.isHaveCat = cat;
+        this.isHaveDog = dog;
     }
 
     public String getStr() {
@@ -55,4 +63,8 @@ public class Home {
     public int getPettedDog() {return this.pettedDog;}
     public void addDamagedFurniture(int num) {this.damagedFurniture += num;}
     public int getDamagedFurniture() {return this.damagedFurniture;}
+
+    public boolean isHaveChild() {return this.isHaveChild;}
+    public boolean isHaveCat() {return this.isHaveCat;}
+    public boolean isHaveDog() {return this.isHaveDog;}
 }
