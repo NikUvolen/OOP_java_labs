@@ -46,5 +46,5 @@ abstract public class Pet extends Creature {
 
     public String getType() {return this.type;}
     @Override
-    public String getStr() {return this.type + ": " + super.getStr();}
+    public String getStatus() {return this.type + ": " + super.getStatus();}
 }

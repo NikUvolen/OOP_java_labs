@@ -29,9 +29,9 @@ public class Home {
         this.isHaveDog = dog;
     }
 
-    public String getStr() {
+    public String getStatus() {
         return String.format(
-                "В тумбочке %d рублей, в холодильнике %d ед. еды для людей и %d ед. для котика. Грязь - %d ед.",
+                "В тумбочке %d рублей\nв холодильнике %d ед. еды для людей и %d ед. для животных\nГрязь - %d ед.",
                 this.money, this.eat, this.petFood, this.dirt
         );
     }

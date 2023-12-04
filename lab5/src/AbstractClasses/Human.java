@@ -12,7 +12,7 @@ abstract public class Human extends Creature {
     }
 
     @Override
-    public String getStr() {
+    public String getStatus() {
         return String.format("Я %s, моя сытость %d ед., моё счастье %d ед.",
                 this.getName(), this.getFullness(), this.getHappiness());
     }

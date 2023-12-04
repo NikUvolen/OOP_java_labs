@@ -22,7 +22,7 @@ public abstract class Creature {
 
     public void act() {}
 
-    public String getStr() {return String.format("Я %s, моя сытость %d ед.", this.getName(), this.getFullness());}
+    public String getStatus() {return String.format("Я %s, моя сытость %d ед.", this.getName(), this.getFullness());}
 
     public String getName() {return this.name;}
     public int getFullness() {return this.fullness;}

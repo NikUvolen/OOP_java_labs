@@ -41,7 +41,6 @@ public class Husband extends Human {
 
 
     private void work() {
-//        System.out.printf("В доме мало денег, поэтому %s пошёл на работу.", this.getName());
         this.logs.append(String.format("В доме мало денег, поэтому %s пошёл на работу.", this.getName()));
         this.getHome().addMoney(150);
         this.reduceHappiness(10);
@@ -49,7 +48,6 @@ public class Husband extends Human {
 
         int random = ThreadLocalRandom.current().nextInt(0, 100+1);
         if (random <= 10) {
-//            System.out.print(" На работе выдали премию!");
             this.logs.append(" На работе выдали премию!");
             this.getHome().addMoney(500);
             this.addHappiness(35);
@@ -57,12 +55,10 @@ public class Husband extends Human {
         }
 
         this.logs.append("\n");
-//        System.out.print("\n");
     }
 
     private void gaming() {
         logs.append(String.format("%s сел в свой т-34 и поехал играть в WoT.\n", this.getName()));
-//        System.out.printf("%s сел в свой т-34 и поехал играть в WoT.\n", this.getName());
         this.reduceFullness(10);
         this.addHappiness(20);
         this.playedOnPc += 1;

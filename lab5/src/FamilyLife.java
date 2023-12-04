@@ -10,19 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-final class MarkChoiceResult {
-    private final int markResult;
-    private final boolean isValid;
-    private final String cmdCommand;
-
-
-    public MarkChoiceResult(int markResult, boolean isValid, String cmdCommand) {
-        this.markResult = markResult;
-        this.isValid = isValid;
-        this.cmdCommand = cmdCommand;
-    }
-}
-
 final public class FamilyLife {
     private static int days = 365;
 
@@ -74,13 +61,10 @@ final public class FamilyLife {
 
             GUI.logsOutput.append(Utils.wrapText("--", '-', (byte) 8, 0));
             for (Creature member : family)
-                GUI.logsOutput.append(member.getStr() + '\n');
+                GUI.logsOutput.append(member.getStatus() + '\n');
+            GUI.logsOutput.append('\n' + home.getStatus() + '\n');
         }
 
         return getResultsSim(home, husband, wife);
-
-//        System.out.print("\n" + Utils.wrapText("++", '+', (byte) 8, 0) + "\n");
-//        Utils.Input("Введите любой символ или enter, чтобы выйти в меню: ", false);
-//        System.out.print(Utils.wrapText("++", '+', (byte) 8, 0) + "\n");
     }
 }
